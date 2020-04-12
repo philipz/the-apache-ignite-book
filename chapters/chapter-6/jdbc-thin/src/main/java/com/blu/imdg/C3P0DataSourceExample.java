@@ -12,20 +12,20 @@ public class C3P0DataSourceExample {
 
     private static final String JDBC_URL = "jdbc:ignite:thin://127.0.0.1";
     private static final String SQL_SALARY_MORE_THAN_3000 = "SELECT ename, deptno, job, sal\n" +
-            "FROM EMP\n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE \n" +
             "WHERE (1.25 * sal) > 3000 ;";
     private static final String SQL_SALARY_SMALLEST="SELECT ename, deptno, sal  \n" +
-            "FROM emp  \n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE  \n" +
             "WHERE sal IN  \n" +
             "( SELECT MIN(sal)  \n" +
-            "FROM emp  \n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE  \n" +
             "GROUP BY deptno \n" +
             ");";
     private static final String SQL_SALARY_MORE_THAN_AVG="SELECT ename, deptno, sal  \n" +
-            "FROM emp  \n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE  \n" +
             "WHERE sal >  \n" +
             "( SELECT AVG(sal)  \n" +
-            "FROM emp \n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE \n" +
             ");";
 
     static {

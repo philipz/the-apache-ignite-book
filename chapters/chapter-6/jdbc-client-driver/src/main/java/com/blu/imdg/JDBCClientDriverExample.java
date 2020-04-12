@@ -9,20 +9,20 @@ public class JDBCClientDriverExample {
     private static final String JDBC_URL = "jdbc:ignite:thin://127.0.0.1";
 
     private static final String SQL_SALARY_MORE_THAN_3000 = "SELECT ename, deptno, job, sal\n" +
-            "FROM EMP\n" +
+            "FROM EMPLOYEE \n" +
             "WHERE (1.25 * sal) > 3000 ;";
     private static final String SQL_SALARY_SMALLEST="SELECT ename, deptno, sal  \n" +
-            "FROM emp  \n" +
+            "FROM EMPLOYEE  \n" +
             "WHERE sal IN  \n" +
             "( SELECT MIN(sal)  \n" +
-            "FROM emp  \n" +
+            "FROM EMPLOYEE  \n" +
             "GROUP BY deptno \n" +
             ");";
     private static final String SQL_SALARY_MORE_THAN_AVG="SELECT ename, deptno, sal  \n" +
-            "FROM emp  \n" +
+            "FROM EMPLOYEE  \n" +
             "WHERE sal >  \n" +
             "( SELECT AVG(sal)  \n" +
-            "FROM emp \n" +
+            "FROM \"SqlQueryEmployees-employees\".EMPLOYEE \n" +
             ");";
 
     public static void main(String[] args) throws ClassNotFoundException{
@@ -30,7 +30,7 @@ public class JDBCClientDriverExample {
         // Register JDBC driver.
         Class.forName("org.apache.ignite.IgniteJdbcDriver");
         // Default cache name does not work. Must be explicitly set the physical cache name
-        try(Connection conn = DriverManager.getConnection("jdbc:ignite:cfg://cache=SQL_PUBLIC_EMP@file:////Users/shamim/Development/workshop/github/the-apache-ignite-book/chapters/chapter-6/jdbc-client-driver/src/main/resources/ignite-jdbc.xml")){
+        try(Connection conn = DriverManager.getConnection("jdbc:ignite:cfg://cache=SqlQueryEmployees-employees@file:////home/philipz/github/the-apache-ignite-book/chapters/chapter-6/jdbc-client-driver/src/main/resources/ignite-jdbc.xml")){
 
             // Execute an query to list the employees whose salary is more than 3000 after giving 25%
             ResultSet rs = conn.createStatement().executeQuery(SQL_SALARY_MORE_THAN_3000);
